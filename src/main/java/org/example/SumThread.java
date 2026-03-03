@@ -1,4 +1,5 @@
 package org.example;
+import java.math.BigInteger;
 
 public class SumThread extends Thread{
     private final int id;
@@ -13,14 +14,16 @@ public class SumThread extends Thread{
 
     @Override
     public void run() {
-        long sum = 0;
-        long current = 0;
+        BigInteger sum = BigInteger.ZERO;
+        BigInteger current = BigInteger.ZERO;
+
+        BigInteger stepBig = BigInteger.valueOf(step);
         long count = 0;
         boolean isStop = false;
 
         do{
-            sum += current;
-            current += step;
+            sum = sum.add(current);
+            current = current.add(stepBig);
             count++;
             isStop = breakThread.isCanBreak(id);
         } while (!isStop);
